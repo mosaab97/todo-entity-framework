@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import TodoForm from './TodoForm';
 import TodoList from './TodoList';
 import server from './server/server';
+import Header from './components/Header';
 
 const App = () => {
     const [todos, setTodos] = useState([]);
@@ -36,9 +37,11 @@ const App = () => {
 
     return (
         <div>
-            <h1>To-Do App</h1>
-            <TodoForm saveTodo={saveTodo} currentTodo={currentTodo} />
-            <TodoList todos={todos} deleteTodo={deleteTodo} setCurrentTodo={setCurrentTodo} />
+            <Header />
+            <div style={{textAlign: 'center', margin: 20, padding: 20}}>
+                <TodoForm saveTodo={saveTodo} currentTodo={currentTodo} />
+                <TodoList todos={todos} deleteTodo={deleteTodo} setCurrentTodo={setCurrentTodo} />
+            </div>
         </div>
     );
 };

@@ -1,5 +1,13 @@
 /* eslint-disable react/prop-types */
+import { Container, InputBase, styled, Typography } from '@mui/material';
 import { useState, useEffect } from 'react';
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: 'inherit',
+    width: '30%',
+    border: '1px solid gray',
+    borderRadius: '5px'
+  }));
 
 const TodoForm = ({ saveTodo, currentTodo }) => {
     const [name, setName] = useState('');
@@ -21,27 +29,33 @@ const TodoForm = ({ saveTodo, currentTodo }) => {
     };
 
     return (
-        <div>
-            <h2>{currentTodo ? 'Edit To-Do' : 'Add To-Do'}</h2>
+        <Container>
+            <Typography variant="h3"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>{currentTodo ? 'Edit To-Do' : 'Add To-Do'}</Typography >
             <form onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    value={name}
+                <StyledInputBase
                     onChange={(e) => setName(e.target.value)}
                     placeholder="To-Do name"
                     required
+                    inputProps={{ 'aria-label': 'search' }}
+                    value={name}
+                    type='text'
                 />
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={isComplete}
-                        onChange={(e) => setIsComplete(e.target.checked)}
-                    />
-                    Complete
-                </label>
-                <button type="submit">{currentTodo ? 'Update' : 'Add'}</button>
+                <Container>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={isComplete}
+                            onChange={(e) => setIsComplete(e.target.checked)}
+                        />
+                        Complete
+                    </label>
+                    <button type="submit">{currentTodo ? 'Update' : 'Add'}</button>
+                </Container>
             </form>
-        </div>
+        </Container>
     );
 };
 
